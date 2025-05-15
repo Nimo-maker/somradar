@@ -25,10 +25,7 @@ def fetch_opensky_flights(path="flights.csv"):
         df = pd.DataFrame(states, columns=columns)
         df = df[df["on_ground"] == False]
         df = df[df["latitude"].notnull() & df["longitude"].notnull()]
-        df = df[
-            (df["latitude"].between(-2, 12)) &
-            (df["longitude"].between(40, 52))
-        ]
+        df = df[(df["latitude"].between(-2, 12)) & (df["longitude"].between(40, 52))]
         if df.empty:
             return False
         flights = df[["callsign", "origin_country", "latitude", "longitude", "velocity"]].copy()
