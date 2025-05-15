@@ -130,3 +130,4 @@ def server(input, output, session):
 
 # === STEP 5: Launch App ===
 app = App(app_ui, server, static_assets=os.path.join(os.path.dirname(__file__), "."))
+
