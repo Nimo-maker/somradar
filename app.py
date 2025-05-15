@@ -63,14 +63,18 @@ def load_flights():
 
 # === STEP 3: Build UI ===
 app_ui = ui.page_fluid(
+    ui.tags.head(
+        ui.tags.link(rel="icon", type="image/x-icon", href="favicon.ico")
+    ),
     ui.panel_title("Somalia Airspace Monitor ✈"),
-    ui.tags.p("Real-time aircraft currently flying over Somaliland airspace."),
+    ui.tags.img(src="logo.png", style="height:60px; margin-bottom:10px;"),
+    ui.tags.p("Real-time aircraft currently flying over Somalia's airspace."),
     ui.input_action_button("refresh", "🔄 Refresh Flights"),
     ui.output_table("flight_table"),
     ui.output_ui("map_output"),
     ui.output_ui("chart_output"),
     ui.hr(),
-    ui.h5("Built by Nima Fidaar © 2025 – Powered by Fidaar Inc")
+    ui.h5("Built by Nima Fidaar © 2025 – Powered by Sigma Inc, OSINT")
 )
 
 # === STEP 4: Server Logic ===
@@ -87,7 +91,7 @@ def server(input, output, session):
     # 🔁 Auto-refresh every 5 minutes
     @reactive.effect
     def auto_refresh():
-        reactive.invalidate_later(300_000)  # 5 minutes
+        reactive.invalidate_later(300_000)
         if fetch_opensky_flights():
             flights.set(load_flights())
 
@@ -128,4 +132,4 @@ def server(input, output, session):
         return ui.HTML(f'<img src="data:image/png;base64,{encoded}" style="max-width:100%;">')
 
 # === STEP 5: Launch App ===
-app = App(app_ui, server)
+app = App(app_ui, server, static_assets=os.path.join(os.path.dirname(__file__), "."))
