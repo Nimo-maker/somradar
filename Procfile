@@ -1,1 +1,1 @@
-web: shiny run --reload server:app
+web: shiny run --port=$PORT app:app

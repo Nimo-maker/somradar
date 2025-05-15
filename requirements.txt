@@ -1,5 +1,8 @@
-shiny==0.7.0
-matplotlib
-pandas
-folium
+shiny
+starlette
+fastapi
+uvicorn
 requests
+matplotlib
+folium
+pandas
