@@ -1,0 +1,5 @@
+shiny==0.7.0
+matplotlib
+pandas
+folium
+requests
